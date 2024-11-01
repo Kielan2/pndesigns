@@ -1,9 +1,22 @@
 import React from "react";
 //import HorizontalScroll from "./components/HorizontalScroll"; // Adjusted import path
 import Hero from "./components/Hero"; // Adjusted import path
+import About from "./components/About"; // Adjusted import path
 import federicaPic from "./images/federica-giusti-V0eu8HF_URU-unsplash.jpg";
 import stephanPic from "./images/stephan-louis-vLE8zGehHwU-unsplash.jpg";
 import deskPic from "./images/pexels-seven11nash-380769.jpg";
+
+// document.addEventListener('scroll', () => {
+//   const logo = document.querySelector('.Logo');
+//   const currentBackground = window.getComputedStyle(document.body).backgroundColor;
+
+//   // Adjust colors based on the background (simplified example)
+//   if (currentBackground === '#1b1c1e') { // Black background
+//     logo.style.setProperty('--logo-color', 'red');
+//   } else {
+//     logo.style.setProperty('--logo-color', 'ghostwhite');
+//   }
+// });
 
 
 function App() {
@@ -17,6 +30,7 @@ function App() {
       </div>
    <Hero />
     </section>
+    <About />
   </div>;
 }
 
