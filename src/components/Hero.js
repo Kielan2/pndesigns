@@ -1,48 +1,47 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ReactComponent as LineSVG } from "../images/3226791_43475.svg";
 
 const Hero = () => {
     const h1Ref = useRef(null);
-
-    // Scramble text effect for exact length
-    function scrambleText(element, finalText, interval = 50, revealSpeed = 1000) {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        let iterations = Math.ceil(revealSpeed / interval);
-        let counter = 0;
-
-        const scramble = setInterval(() => {
-            const scrambledText = finalText.split("").map((char, i) => {
-                return Math.random() > counter / iterations ? chars[Math.floor(Math.random() * chars.length)] : char;
-            }).join("");
-
-            element.textContent = scrambledText;
-            counter++;
-
-            if (counter >= iterations) {
-                clearInterval(scramble);
-                element.textContent = finalText;
-            }
-        }, interval);
-    }
+    const svgRef = useRef(null);
 
     useEffect(() => {
-        // Initial GSAP animation
-        gsap.to(h1Ref.current, { 
+        // Initial GSAP animation for the h1 element
+        gsap.to(h1Ref.current, {
             x: "100%",
             ease: "power1.out",
             opacity: 1,
-            duration: 1,
-            onComplete: () => {
-                // Start scramble effect after GSAP animation completes
-                scrambleText(h1Ref.current, "PN Designs");
-            }
+            duration: 1
+        });
+
+        // Select the path element inside the SVG
+        const path = svgRef.current.querySelector("path");
+
+        // Get the length of the path
+        const pathLength = path.getTotalLength();
+
+        // Set up initial styles for the path to make it hidden
+        gsap.set(path, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength,
+        });
+
+        // Animate the strokeDashoffset to reveal the path from top to bottom
+        gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power1.out"
         });
     }, []);
 
-    return React.createElement(
-        "h1",
-        { className: "oswald-light", ref: h1Ref },
-        "PN Designs"
+    return (
+        <div>
+            <LineSVG ref={svgRef} className="LineSvg"/>
+            <h1 className="oswald-light" ref={h1Ref}>
+                PN Designs
+            </h1>
+        </div>
     );
 };
 
