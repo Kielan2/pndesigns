@@ -1,8 +1,9 @@
 import React from "react";
-//import HorizontalScroll from "./components/HorizontalScroll"; // Adjusted import path
+import HorizontalScroll from "./components/HorizontalScroll"; // Adjusted import path
 import Hero from "./components/Hero"; // Adjusted import path
 import About from "./components/About"; // Adjusted import path
 import Gallery from "./components/Gallery"; // Adjusted import path
+import FlipGallery from "./components/Test"; // Adjusted import path
 import federicaPic from "./images/federica-giusti-V0eu8HF_URU-unsplash.jpg";
 import stephanPic from "./images/stephan-louis-vLE8zGehHwU-unsplash.jpg";
 import deskPic from "./images/pexels-seven11nash-380769.jpg";
@@ -33,6 +34,8 @@ function App() {
     </section>
     <About />
     <Gallery />
+    <HorizontalScroll />
+    <FlipGallery />
   </div>;
 }
 
