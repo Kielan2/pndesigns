@@ -1,79 +1,66 @@
-// FlipGallery.jsx
-import React, { useState } from 'react';
-import { gsap } from 'gsap';
+import React, { useState } from "react";
+import gsap from "gsap";
+import Flip from "gsap/Flip";
 
-const images = [
-  'https://via.placeholder.com/150/FF5733/FFFFFF?text=Image+1',
-  'https://via.placeholder.com/150/33FF57/FFFFFF?text=Image+2',
-  'https://via.placeholder.com/150/3357FF/FFFFFF?text=Image+3',
-  'https://via.placeholder.com/150/FF33A8/FFFFFF?text=Image+4',
-];
+gsap.registerPlugin(Flip);
 
-const getRandomDirection = () => {
-  const directions = ['top', 'bottom', 'left', 'right'];
-  return directions[Math.floor(Math.random() * directions.length)];
-};
+const ScrollGallery = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
 
-const FlipGallery = () => {
-  const [showImages, setShowImages] = useState(false);
+  const images = Array.from({ length: 9 }, (_, i) => ({
+    id: i + 1,
+    src: `https://placehold.co/600x400?text=Image+${i + 1}`,
+    title: `Title ${i + 1}`,
+    description: `Description for image ${i + 1}`,
+  }));
 
-  const handleClick = () => {
-    setShowImages(true);
-    
-    const tl = gsap.timeline();
-    images.forEach((_, index) => {
-      const direction = getRandomDirection();
-      const offset = direction === 'top' || direction === 'bottom' ? 100 : 100;
-      const rotationY = direction === 'left' || direction === 'right' ? 90 : 0;
-      const yOffset = direction === 'top' ? -offset : direction === 'bottom' ? offset : 0;
-      const xOffset = direction === 'left' ? -offset : direction === 'right' ? offset : 0;
+  const openModal = (image) => {
+    setSelectedImage(image);
+    gsap.fromTo(
+      ".modal-content",
+      { opacity: 0, y: -50 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+    );
+  };
 
-      tl.fromTo(
-        `.image-${index}`,
-        {
-          x: xOffset,
-          y: yOffset,
-          opacity: 0,
-          rotationY,
-        },
-        {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          rotationY: 0,
-          duration: 1,
-          stagger: 0.2,
-        }
-      );
+  const closeModal = () => {
+    gsap.to(".modal-content", {
+      opacity: 0,
+      y: -50,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => setSelectedImage(null),
     });
   };
 
   return (
-    <div style={{ textAlign: 'center', margin: '20px' }}>
-      <button onClick={handleClick}>See Pictures</button>
-      <div className="gallery" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', flexWrap: 'wrap' }}>
-        {showImages && images.map((src, index) => (
-          <div className="image-container" key={index} style={{ perspective: '1000px', margin: '10px' }}>
-            <div
-              className={`image image-${index}`} 
-              style={{
-                width: '150px', 
-                height: '150px', 
-                transformStyle: 'preserve-3d',
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              <img src={src} alt={`Image ${index + 1}`} style={{
-                width: '100%', 
-                height: '100%', 
-                borderRadius: '10px',
-              }} />
+    <div className="gallery">
+      {images.map((image) => (
+        <div
+          key={image.id}
+          className="gallery-item"
+          onClick={() => openModal(image)}
+        >
+          <img src={image.src} alt={`Image ${image.id}`} />
+        </div>
+      ))}
+
+      {selectedImage && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage.src} alt={selectedImage.title} />
+            <div className="modal-text">
+              <h2>{selectedImage.title}</h2>
+              <p>{selectedImage.description}</p>
             </div>
+            <button className="close-button" onClick={closeModal}>
+              Close
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default FlipGallery;
+export default ScrollGallery;
