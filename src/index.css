@@ -158,6 +158,7 @@ p {
   font-weight: 400;
   font-size: 1.25vw;
   line-height: 150%;
+  margin-bottom: 10px;
 }
 
 .Hero {
@@ -274,7 +275,7 @@ p {
 }
 
 .Gallery {
-  background: linear-gradient(to bottom, rgba(27, 28, 30, 0.75), rgba(27, 28, 30, 0.75)), url("../src/images/photorealistic-stone-wall-surface.jpg");
+  background: linear-gradient(to bottom, rgba(27, 28, 30, 1), rgba(27, 28, 30, 0.75)), url("../src/images/photorealistic-stone-wall-surface.jpg");
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -287,7 +288,7 @@ p {
   position: relative;
   padding-bottom: 100px;
   .Gallery-content {
-    padding: 20px;
+    padding: 50px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -300,25 +301,29 @@ p {
     transform-style: preserve-3d;
     transform: perspective(1000px);
     display: flex;
+    justify-content: center;
     position: relative;
     z-index: 5;
+    gap: 10px;
     .Gallery-img {
-      transition: all .25s ease-in-out;
+      transition: all .25s ease;
       transform-origin: top;
       filter: brightness(0.25);
       flex: 1 1 8%;
-      min-height: 20vh;
+      min-height: 500px;
       object-fit: cover;
       width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 100px;
+    /* margin: 0 auto; */
     display: block;
       &:hover {
         filter: brightness(1);
         transform: translateZ(200px);
-        /* flex: 1 1 20%; */
-      }
-      &:hover + * {
+    max-width: 300px;
+    /* flex: 1 1 20%; */
+  }
+  &:hover + * {
+        max-width: 150px;
         filter: brightness(0.75);
         transform: translateZ(150px) rotateY(40deg);
         flex: 1 1 5%;
@@ -334,6 +339,7 @@ p {
         flex: 1 1 5%;
       }
       &:has(+ *:hover) {
+        max-width: 150px;
         filter: brightness(0.75);
         transform: translateZ(150px) rotateY(-40deg);
         flex: 1 1 5%;
@@ -397,6 +403,7 @@ p {
   max-width: 800px;
   width: 100%;
   gap: 20px;
+  color: #333;
 }
 
 .modal-content img {

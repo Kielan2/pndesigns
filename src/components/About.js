@@ -56,7 +56,10 @@ const About = () => {
             <div className="About-content" ref={aboutContent}>
                 <h2 ref={aboutHeader}>About</h2>
                 <p>
-                    As an experienced interior designer, I am passionate about transforming spaces into reflections of my clients’ unique styles and needs. With a keen eye for detail and a strong foundation in design principles, I bring functionality and beauty into every project, whether it’s a cozy home renovation or a large-scale commercial transformation. My approach is rooted in collaboration and adaptability, ensuring each design not only enhances the space but also aligns perfectly with my clients’ lifestyles. From concept development to the final reveal, I aim to create environments that inspire, comfort, and elevate.
+                Peyton began her career journey at Root'd as an intern in 2021, ignited by her passion for interior design nurtured at Anderson University, where she earned a Bachelor's degree in the field.  She is proficient in 3D renderings and computer-aided design, earning recognition from prestigious competitions like Kravet and IDEC Honors.
+                </p>
+                <p>
+                During her three years at Root'd, Peyton has transitioned from supporting roles to lead designer. She has a deep love for millwork, lighting, and textile design, infusing spaces with rich jewel tones and eclectic elements to create environments that energize the senses. More than anything, Peyton is passionate about the transformative power of design and is an advocate for manifesting a client's vision in every project.
                 </p>
             </div>
             <div className="Video">
